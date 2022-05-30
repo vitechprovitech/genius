@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div class="directory-info-row" th:fragment="contents(articles)">
+		<div class="row">
+			<div class="col-md-6 col-sm-6" th:each="a, state:${articles}">
+
+				<div class="panel">
+					<div class="panel-body">
+						<div class="media">
+							<a class="pull-left" href="#"> <th:block
+									th:switch="${a.article.typeMedia}">
+									<th:block th:case='VIDEO'>
+										<img class="thumb media-object"
+											th:src="@{/video/{typeMedia}/{id}/{thumbnail}(typeMedia=${a.article.typeMedia}, id=${a.article.id}, thumbnail=${a.article.thumbnail})}"
+											alt="" />
+									</th:block>
+									<th:block th:case='AUDIO'>
+										<img class="thumb media-object"
+											th:src="@{/assets/images/audio.svg}" alt="" />
+									</th:block>
+									<th:block th:case='BOOK'>
+										<img class="thumb media-object book"
+											th:src="@{/assets/images/pdf.svg}" alt="" />
+									</th:block>
+								</th:block>
+							</a>
+							<div class="media-body">
+								<h4 th:text="${a.article.title}"></h4>
+								<address th:text="${a.article.content}"></address>
+
+								<div th:inline="text">
+									Edited at : <strong>[[${#dates.format(a.article.editeLe,
+										'dd-MM-yyyy hh:mm:ss')}]]</strong>
+								</div>
+								<th:block th:switch="${a.article.state}">
+									<th:block th:case=0>
+										<div th:inline="text">
+											State : <strong style="color: #ffbb00;">WAITING ...
+											</strong>
+										</div>
+									</th:block>
+									<th:block th:case=1>
+										<div th:inline="text">
+											Price : <strong style="color: #08aa5c;">[[${a.article.prix}]]
+											</strong>
+										</div>
+										<div th:inline="text">
+											Period : <strong style="color: #08aa5c;">[[${a.article.periode}]]
+											</strong>
+										</div>
+										<div th:inline="text">
+											State : <strong style="color: #08aa5c;">PUBLISHED </strong>
+										</div>
+										<div th:inline="text">
+											MAX DEVICES : <strong style="color: #08aa5c;">[[${a.article.totalMAC}]]
+											</strong>
+										</div>
+										<div th:inline="text">
+											published at : <strong style="color: #08aa5c;">[[${#dates.format(a.article.valideLe,
+												'dd-MM-yyyy hh:mm:ss')}]]</strong>
+										</div>
+									</th:block>
+									<th:block th:case=-4>
+										<div th:inline="text">
+											State : <strong style="color: #ff0460;">REJECTED </strong>
+										</div>
+									</th:block>
+								</th:block>
+								<!-- Button trigger modal -->
+								<a href="#" class="btn btn-primary rounded show"
+									data-toggle="modal" data-target="#exampleModal"> <i
+									class="fa fa-eye"></i> Show
+								</a> <a
+									th:href="@{/video/{typeMedia}/{id}/{thumbnail}(typeMedia=${a.article.typeMedia}, id=${a.article.id}, thumbnail=${a.article.fichier})}"
+									style="display: none" th:class="lien"></a>
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModal" tabindex="-1"
+									role="dialog" aria-labelledby="exampleModalLabel"
+									aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Modal
+													title</h5>
+												<a href="#" class="close" data-dismiss="modal"
+													aria-label="Close"> <span aria-hidden="true">&times;</span>
+												</a>
+											</div>
+											<div class="modal-body">
+												<video autoplay id="main-video"
+													style="display: none; max-width: 400px" controls>
+													<source type="video/mp4">
+
+												</video>
+												<canvas id="video-canvas" style="display: none"></canvas>
+											</div>
+											<div class="modal-footer">
+												<a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+												<a href="#" class="btn btn-primary">Save changes</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<th:block
+									th:if="${session.user.profil.profil=='ADMIN' || session.user.profil.profil=='SUPER_ADMIN'}">
+									<a th:href="@{/showValidationMediaWeb(id=${a.id})}"
+										class="btn btn-primary rounded" type="button"><i
+										class="fa fa-check"></i> Validation</a>
+								</th:block>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>

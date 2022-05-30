@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template">
+<head>
+
+<title th:inline="text">Add article in
+	[[${categorie.categorie}]]</title>
+<style>
+.file-upload {
+	display: block;
+	text-align: center;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+}
+
+.file-upload .file-select {
+	display: block;
+	border: 2px solid #dce4ec;
+	color: #34495e;
+	cursor: pointer;
+	height: 40px;
+	line-height: 40px;
+	text-align: left;
+	background: #FFFFFF;
+	overflow: hidden;
+	position: relative;
+}
+
+.file-upload .file-select .file-select-button {
+	background: #dce4ec;
+	padding: 0 10px;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+}
+
+.file-upload .file-select .file-select-name {
+	line-height: 40px;
+	display: inline-block;
+	padding: 0 10px;
+}
+
+.file-upload .file-select:hover {
+	border-color: #34495e;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload .file-select:hover .file-select-button {
+	background: #34495e;
+	color: #FFFFFF;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload.active .file-select {
+	border-color: #3fa46a;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload.active .file-select .file-select-button {
+	background: #3fa46a;
+	color: #FFFFFF;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload .file-select input[type=file] {
+	z-index: 100;
+	cursor: pointer;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	filter: alpha(opacity = 0);
+}
+
+.file-upload .file-select.file-select-disabled {
+	opacity: 0.65;
+}
+
+.file-upload .file-select.file-select-disabled:hover {
+	cursor: default;
+	display: block;
+	border: 2px solid #dce4ec;
+	color: #34495e;
+	cursor: pointer;
+	height: 40px;
+	line-height: 40px;
+	margin-top: 5px;
+	text-align: left;
+	background: #FFFFFF;
+	overflow: hidden;
+	position: relative;
+}
+
+.file-upload .file-select.file-select-disabled:hover .file-select-button
+	{
+	background: #dce4ec;
+	color: #666666;
+	padding: 0 10px;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+}
+
+.file-upload .file-select.file-select-disabled:hover .file-select-name {
+	line-height: 40px;
+	display: inline-block;
+	padding: 0 10px;
+}
+
+/*   -----------------------------------------------  thumbnail upload style*/
+#video-demo-container {
+	width: 400px;
+	margin: 40px auto;
+}
+
+#main-video {
+	display: none;
+	max-width: 400px;
+}
+
+#thumbnail-container {
+	display: none;
+}
+
+#get-thumbnail {
+	display: none;
+}
+
+#video-canvas {
+	display: none;
+}
+
+#upload-button {
+	width: 150px;
+	display: block;
+	margin: 20px auto;
+}
+
+/*end thumnails                        */
+</style>
+</head>
+<body>
+	<!-- ============================================================== -->
+	<!-- main wrapper -->
+	<!-- ============================================================== -->
+	<div class="dashboard-main-wrapper">
+		<!-- ============================================================== -->
+		<!-- wrapper  -->
+		<!-- ============================================================== -->
+		<div class="dashboard-wrapper">
+			<div class="dashboard-ecommerce">
+				<div class="container-fluid dashboard-content "
+					layout:fragment="content">
+					<!-- ============================================================== -->
+					<!-- pageheader  -->
+					<!-- ============================================================== -->
+					<div class="row">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="page-header">
+								<h2 class="pageheader-title">Add articles in
+									[[${categorie.categorie}]]</h2>
+								<p class="pageheader-text">List of uploads</p>
+								<div class="page-breadcrumb">
+									<nav aria-label="breadcrumb">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item"><a th:href="@{/}"
+												class="breadcrumb-link">Home</a></li>
+											<li class="breadcrumb-item" aria-current="page"><a
+												th:href="@{/categories}" class="breadcrumb-link">Contents
+													management</a></li>
+											<li class="breadcrumb-item active" aria-current="page">New
+												upload</li>
+										</ol>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- ============================================================== -->
+					<!-- end pageheader  -->
+					<!-- Buttons area  -->
+
+					<!--  end button area    -->
+					<!-- ============================================================== -->
+
+					<!-- ============================================================== -->
+
+					<!-- recent orders  -->
+					<!-- ============================================================== -->
+					<div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
+
+						<!-- ============================================================== -->
+						<!-- select options  -->
+						<!-- ============================================================== -->
+						<div class="card">
+							<div class="row">
+								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+									<div class="card-body border-top">
+										<h3></h3>
+										<form th:action="@{/saveAssignation}" method="post" id="form">
+											<input type="hidden" name="idCategorie" th:value="${categorie.id}" />
+
+<!-- 											<div class="form-group" style="display:none">
+												<label for="description"> Description (optional)</label>
+												<div class='input-group'>
+													<textarea class="form-control" id="contenu" name="contenu"
+														rows="3"></textarea>
+												</div>
+											</div> -->
+											<div class="form-group">
+												<input type="hidden" th:value="${categorie.id}"> <label
+													for="categorie">Category</label> <select
+													class="form-control" id="categorie" name="categorie">
+													<th:block th:if="${categorie!=null}">
+														<option th:value="${categorie.code}"
+															th:text="${categorie.categorie}" selected></option>
+													</th:block>
+													<th:block th:unless="${categorie!=null}">
+														<option value="-1">Choose a category</option>
+														<th:block th:each="ca : ${categories}">
+															<option th:value="${ca.code}" th:text="${ca.categorie}"></option>
+														</th:block>
+													</th:block>
+
+												</select>
+											</div>
+
+											<!--                                              ------- Table articles strt here  -->
+											<fieldset style="margin-top:15px; margin-bottom:15px">
+												<legend
+													style="font-size: 15px; font-feature-settings: normal;">Choose
+													articles </legend><hr style="margin-top:0px"/>
+												<div class="table-responsive">
+													<table class="table">
+														<thead class="bg-light">
+															<tr class="border-0">
+																<th class="border-0">#</th>
+																<th class="border-0">Image</th>
+																<th class="border-0">Product title</th>
+																<th class="border-0">Description</th>
+																<th class="border-0">edited At</th>
+															</tr>
+														</thead>
+														<tbody>
+															<th:block th:each="as: ${assignations}">
+																<tr>
+																	<td>
+			                                            				<label class="custom-control custom-checkbox">
+                                                							<input type="checkbox" checked=""  class="custom-control-input check">
+                                                							<input type="hidden" class="idArticle"  th:value="${as.article.id}" /> 
+                                                							<span class="custom-control-label"></span>
+                                            							</label>														
+																	</td>
+																	<td>
+																		<div class="m-r-10">
+																			<img th:src="@{/video/{typeMedia}/{id}/{thumbnail}(typeMedia=${as.article.typeMedia}, id=${as.article.id}, thumbnail=${as.article.thumbnail})}" alt="user" class="rounded" width="100"/>
+																		</div>
+																	</td>
+																	<td th:text="${as.article.title}"></td>
+																	<td th:text="${as.article.content}"></td>
+																	<td th:text="${as.article.editeLe}"></td>
+																</tr>
+															</th:block>
+														</tbody>
+													</table>
+												</div>
+											</fieldset>
+
+											<!--                                         ------------------ End here -------------------------------- -->
+											<div class="form-group">
+											<label for="prix"> Price</label>
+												<div class='input-group'>
+												
+													<input class="form-control form-control-lg" type="text"
+														id="price" name="prix" required=""
+														placeholder="Enter a Price" />
+												</div>
+											</div>
+											<div class="form-group">
+												<div class='input-group'>
+													<input class="form-control form-control-lg" type="text"
+														id="periode" name="periode" required=""
+														placeholder="Expiration period (days)" />
+												</div>
+											</div>
+											<div class="form-group">
+												<div class='input-group'>
+													<input class="form-control form-control-lg" type="text"
+														id="periode" name="totalMac" required=""
+														placeholder="Total MAC" />
+												</div>
+											</div>											
+											<div class="form-group pt-2">
+												<button id="submit" class="btn btn-block btn-primary" style="width: 30%"
+													type="submit">
+													<i class="fa fa-save"></i> Submit </a>
+												</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ============================================================== -->
+				<!-- end recent orders  -->
+
+
+				<!-- ============================================================== -->
+			</div>
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- end wrapper  -->
+	<!-- ============================================================== -->
+
+	<th:block layout:fragment="script">
+
+		<script>
+		        $("#form").on("submit", function () {
+
+		   			
+		            var i = 0;
+		            $(".check:checked").next(".idArticle").each(function () {
+		                var hidden = document.createElement("input");
+		                $(hidden).attr("type", "hidden");
+		                $(hidden).attr("value", $(this).val());
+		                $(hidden).attr("name", "ids");
+		                $('#form').append($(hidden));
+		                i++;
+		                alert("dddd =>"+$(hidden).val());
+		            });
+		            //$('#form').submit();
+		          
+		        });
+
+
+		</script>
+
+	</th:block>
+</body>
+
+</html>

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template">
+<head>
+
+<title>User details</title>
+</head>
+<body>
+	<!-- ============================================================== -->
+	<!-- main wrapper -->
+	<!-- ============================================================== -->
+	<div class="dashboard-main-wrapper">
+		<!-- ============================================================== -->
+		<!-- wrapper  -->
+		<!-- ============================================================== -->
+		<div class="dashboard-wrapper">
+			<div class="dashboard-ecommerce">
+				<div class="container-fluid dashboard-content "
+					layout:fragment="content">
+					<!-- ============================================================== -->
+					<!-- pageheader  -->
+					<!-- ============================================================== -->
+					<div class="row">
+					
+						
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="page-header">
+								<p class="pageheader-text">
+								</p>
+								<div class="page-breadcrumb">
+									<nav aria-label="breadcrumb">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item"><a th:href="@{/}"
+												class="breadcrumb-link">Home</a></li>
+										</ol>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- ============================================================== -->
+					<!-- end pageheader  -->
+					<!-- Buttons area  -->
+
+					<!--  end button area    -->
+					<!-- ============================================================== -->
+
+					<!-- ============================================================== -->
+
+					<!-- recent orders  -->
+					<!-- ============================================================== -->
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+						<div class="card">
+
+							<h5 class="card-header">
+									<div class="alert alert-success" role="alert">
+									  Your request to be a partner has been sent!!
+									</div>							
+							</h5>
+
+							<div class="card-body p-0">
+								<div class="content">
+									<div class="container">
+										<div class="row">
+											<div class="col-12">
+												<div class="card-box">
+													<div class="row">
+														<div class="col-lg-9 col-xl-9">
+															<div class="table-responsive" style="padding:30px">
+																<table class="table table-striped">
+																	<tr>
+																		<th>
+																			Photo
+																		</th>
+																	</tr>
+																	<tr>
+																		<th>
+																			<th:block th:if="${user.photo!=null && user.photo!='' }">
+																				<img th:src="'data:image/jpg;base64, '+${user.photo}" style="max-width:200px"/>
+																			</th:block>	
+																			<th:block th:unless="${user.photo!=null && user.photo!='' }">
+																				<img th:src="@{/assets/images/account.png}" />
+																			</th:block>																				
+																		</th>
+																	</tr>
+																	<tr>
+																		<th>Name</th>
+																	</tr>
+																	<tr>
+																		<td th:text="${user.name}"></td>
+																	</tr>
+
+																		
+																	<tr>
+																		<th>Born at</th>
+																	</tr>
+																	<tr>
+																		<td th:text="${user.birthDate}"></td>
+																	</tr>																			
+																	<tr>
+																		<th>Email</th>
+																	</tr>
+																	<tr>
+																		<td th:text="${user.email}"></td>
+																	</tr>
+																	<tr>
+																		<th>Phone number</th>
+																	</tr>
+																	<tr>
+																		<td th:text="${user.phone}"></td>
+																	</tr>
+																	<tr>
+																		<th>Address</th>
+																	</tr>
+																	<tr>
+																		<td th:text="${user.address}"></td>
+																	</tr>
+																	<tr>
+																		<th>City</th>
+																	</tr>
+																	<tr>
+																		<td th:text="${user.city.nom}"></td>
+																	</tr>
+																	<tr>
+																		<th>Country</th>
+																	</tr>
+																	<tr>
+																		<td th:text="${user.city.country.nom}"></td>
+																	</tr>	
+																	<tr>
+																		<th>updated at</th>
+																	</tr>
+																	<tr>
+																		<td th:text="${#dates.format(user.lastUpdate, 'dd-MM-yyyy hh:mm:ss')}"></td>
+																	</tr>		
+																																																																																																																																			
+																</table>
+															</div>
+															<hr/>
+														</div>
+													</div>
+
+													<div class="row">
+														<div class="alert alert-success" role="alert">
+														  This is a success alert—check it out!
+														</div>													
+													</div>
+													<!-- end col -->
+												</div>
+												<!-- end row -->
+											</div>
+											<!-- container -->
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ============================================================== -->
+						<!-- end recent orders  -->
+
+
+						<!-- ============================================================== -->
+					</div>
+				</div>
+				<!-- ============================================================== -->
+				<!-- footer -->
+				<!-- ============================================================== -->
+
+				<!-- ============================================================== -->
+				<!-- end footer -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- ============================================================== -->
+			<!-- end wrapper  -->
+			<!-- ============================================================== -->
+		</div>
+	</div>
+	<th:block layout:fragment="script">
+
+	</th:block>
+</body>
+
+</html>

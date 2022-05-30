@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous" />
+
+</head>
+<body>
+       <div class="container" style="background: #1f1e4e">
+            <div class="jumbotron" style="background: #1f1e4e">
+                <div class="jumbotron" style="background: #FFFFFF; text-align: center;">
+                    <h5 style=" font-weight: 900;  font-size: xx-large">GENIUS HOME</h5>                 
+                </div>
+                <div class="jumbotron"  style="background-color: white">
+                <p>Dear <strong th:text="${data.name}">Prenom</strong>,</p>
+
+                <p>Following your subscription to the product <strong th:text="${data.productName}">180_Product name</strong>, your activation code is <strong th:text="${data.activationCode}">916288</strong>
+
+                <h2><u>Product details:</u></h2>
+                Name:<strong th:text="${data.productName}">BATCHATO FAGUY</strong><br/>
+                Code:<strong th:text="${data.activationCode}">555555</strong><br/>
+                Price: <strong th:text="${data.prix}">200</strong><br/>
+                Validity left (days): <strong th:text="${data.remainingPeriod}">29</strong><br/>
+                Max. devises left:  <strong th:text="${data.remainingMaxDevices}">0</strong><br/>
+                Date of subscription :<strong th:text="${data.dateSubscription}">12/01/2022</strong><br/>
+				Type  :<strong th:text="${data.type}">12/01/2022</strong><br/>
+                <p>Kindly keep this as receipt for your subscription or purchase. Thank you and congratulations for your endeavour.</p>
+                <p>Genius Home</p>           
+                    
+                </div>
+            </div></div>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>        
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template">
+<head>
+<th:block layout:fragment="style">
+	<link
+		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+		rel="stylesheet">
+				<link rel="stylesheet"
+	th:href="@{/assets/genius/css/file-system.css}" />
+	<style type="text/css">
+</style>
+</th:block>
+<title>Uploads management</title>
+</head>
+<body>
+	<!-- ============================================================== -->
+	<!-- main wrapper -->
+	<!-- ============================================================== -->
+	<div class="dashboard-main-wrapper">
+		<!-- ============================================================== -->
+		<!-- wrapper  -->
+		<!-- ============================================================== -->
+		<div class="dashboard-wrapper">
+			<div class="dashboard-ecommerce">
+				<div class="container-fluid dashboard-content "
+					layout:fragment="content">
+					<!-- ============================================================== -->
+					<!-- pageheader  -->
+					<!-- ============================================================== -->
+					<div class="row">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="page-header">
+								<h2 class="pageheader-title">My uploads as partner</h2>
+								<p class="pageheader-text">List of contents</p>
+								<div class="page-breadcrumb">
+									<nav aria-label="breadcrumb">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item"><a th:href="@{/}"
+												class="breadcrumb-link">Home</a></li>
+											<li class="breadcrumb-item active" aria-current="page">List
+												of contents</li>
+										</ol>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- ============================================================== -->
+					<!-- end pageheader  -->
+					<!-- ============================================================== -->
+					<div class="row">
+						<!-- ============================================================== -->
+
+						<!-- ============================================================== -->
+
+						<!-- recent orders  -->
+						<!-- ============================================================== -->
+						<div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
+							<div class="card" style="padding: 10px">
+								<a class="btn btn-danger btn-rounded"
+									data-mdb-ripple-color="dark"
+									style="background-color: #ee55a2; width: 30%"
+									th:href="@{/newUploadView}" role="button"> <i
+									class="fa fa-plus"></i> Add new upload
+								</a>
+							</div>
+
+							<div class="card">
+								<h5 class="card-header">List of contents</h5>
+								<div class="card-body p-0">
+									<div class="content">
+										<div class="container" style="background: #fafaff;">
+<!--      //////////////////////////////////////////////// onglets /////////// -->
+										<div class="tab-regular col-md-12 col-sm-12">
+											<ul class="nav nav-tabs " id="myTab" role="tablist"
+												style="padding: 10px">
+												<li class="nav-item"><a class="nav-link active show"
+													id="home-tab" data-toggle="tab" href="#home" role="tab"
+													aria-controls="home" aria-selected="true">VIDEOS</a></li>
+												<li class="nav-item"><a class="nav-link"
+													id="profile-tab" data-toggle="tab" href="#profile"
+													role="tab" aria-controls="profile" aria-selected="false">AUDIOS</a></li>
+												<li class="nav-item"><a class="nav-link"
+													id="contact-tab" data-toggle="tab" href="#contact"
+													role="tab" aria-controls="contact" aria-selected="false">BOOKS</a></li>
+											</ul>
+											<div class="tab-content" id="myTabContent">
+												<div class="tab-pane fade active show" id="home"
+													role="tabpanel" aria-labelledby="home-tab">
+													<h3>POSTED VIDEOS</h3>
+													<div th:insert="fragments/contents :: contents(articles=${videos})"></div>
+												</div>
+												<div class="tab-pane fade" id="profile" role="tabpanel"
+													aria-labelledby="profile-tab">
+													<h3>POSTED AUDIOS</h3>
+													<div th:insert="fragments/contents :: contents(articles=${audios})"></div>
+												</div>
+												<div class="tab-pane fade" id="contact" role="tabpanel"
+													aria-labelledby="contact-tab">
+													<h3>POSTED BOOKS</h3>
+													<div th:insert="fragments/contents :: contents(articles=${books})"></div>
+												</div>
+											</div>
+										</div>
+<!--                 ////////////////////////////////////// fin onglets  -->										
+											<!-- copier ici  -->
+										</div>
+									</div>
+								</div>
+								<!-- ============================================================== -->
+								<!-- end recent orders  -->
+
+
+								<!-- ============================================================== -->
+							</div>
+						</div>
+					</div>
+					<!-- ============================================================== -->
+					<!-- footer -->
+					<!-- ============================================================== -->
+
+					<!-- ============================================================== -->
+					<!-- end footer -->
+					<!-- ============================================================== -->
+				</div>
+				<!-- ============================================================== -->
+				<!-- end wrapper  -->
+				<!-- ============================================================== -->
+			</div>
+		</div>
+	
+		<th:block layout:fragment="script">
+			<script th:src="@{assets/vendor/context-menu/js/demo2.js}"></script>
+			<script th:src="@{assets/genius/js/file-system-contents.js}"></script>
+				
+			
+		</th:block>
+		
+</body>
+
+</html>

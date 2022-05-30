@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}" />
+    <link th:href="@{assets/vendor/fonts/circular-std/style.css}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{assets/libs/css/style.css}" />
+    <link rel="stylesheet" th:href="@{assets/vendor/fonts/fontawesome/css/fontawesome-all.css}" />
+      <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    .logo-img{
+    	width:30%
+    }
+    .splash-container{
+    	max-width: none;
+    }
+    
+    /*   -------------------- Upload file style --------------------------- */
+
+.file-upload {
+	display: block;
+	text-align: center;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+}
+
+.file-upload .file-select {
+	display: block;
+	border: 2px solid #dce4ec;
+	color: #34495e;
+	cursor: pointer;
+	height: 40px;
+	line-height: 40px;
+	text-align: left;
+	background: #FFFFFF;
+	overflow: hidden;
+	position: relative;
+}
+
+.file-upload .file-select .file-select-button {
+	background: #dce4ec;
+	padding: 0 10px;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+}
+
+.file-upload .file-select .file-select-name {
+	line-height: 40px;
+	display: inline-block;
+	padding: 0 10px;
+}
+
+.file-upload .file-select:hover {
+	border-color: #34495e;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload .file-select:hover .file-select-button {
+	background: #34495e;
+	color: #FFFFFF;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload.active .file-select {
+	border-color: #3fa46a;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload.active .file-select .file-select-button {
+	background: #3fa46a;
+	color: #FFFFFF;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload .file-select input[type=file] {
+	z-index: 100;
+	cursor: pointer;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	filter: alpha(opacity = 0);
+}
+
+.file-upload .file-select.file-select-disabled {
+	opacity: 0.65;
+}
+
+.file-upload .file-select.file-select-disabled:hover {
+	cursor: default;
+	display: block;
+	border: 2px solid #dce4ec;
+	color: #34495e;
+	cursor: pointer;
+	height: 40px;
+	line-height: 40px;
+	margin-top: 5px;
+	text-align: left;
+	background: #FFFFFF;
+	overflow: hidden;
+	position: relative;
+}
+
+.file-upload .file-select.file-select-disabled:hover .file-select-button
+	{
+	background: #dce4ec;
+	color: #666666;
+	padding: 0 10px;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+}
+
+.file-upload .file-select.file-select-disabled:hover .file-select-name {
+	line-height: 40px;
+	display: inline-block;
+	padding: 0 10px;
+}
+    
+    /*    ---------------------- fin upload file ----------------------------- */
+    </style>
+</head>
+<!-- ============================================================== -->
+<!-- signup form  -->
+<!-- ============================================================== -->
+
+<body class="container" style="background: #16214d">
+
+
+    <!-- ============================================================== -->
+    <!-- signup form  -->
+    <!-- ============================================================== -->
+    <form class="splash-container" id="form" method="POST" th:action="@{/creerUnCompteWeb}">
+        <div class="card ">
+			<th:block th:if="${code==1}">
+					<div class="alert alert-success" >
+					  <strong th:text=${message}></strong> .
+					</div>  
+			</th:block>
+			<th:block th:if="${code==-1}">
+						<div class="alert alert-danger">
+						  <strong th:text=${message}></strong> .
+						</div> 			
+ 
+			</th:block>            
+            <div class="card-header">
+                <h3 class="mb-1">Registration</h3>
+                <p>Please enter your user information.</p>
+            </div>
+            <div class="card-body">
+            <div class="row">
+                <div class="col col-6">
+		                <div class="form-group">
+		                    <input class="form-control form-control-lg" type="text" name="surname" required=""  placeholder="Surname" autocomplete="off">
+		                </div>
+		                <div class="form-group">
+		                    <input class="form-control form-control-lg" type="text" name="name" required=""  placeholder="Name" autocomplete="off">
+		                </div>
+		                <div class="form-group">
+		                	<label  >Birthdate</label>
+				            <div class='input-group date' id='datetimepicker1' >
+				               
+				               <select class="form-control" id="day" name="day">
+				               </select>
+				               <select class="form-control" id="month" name="month">
+				               </select>
+				               <select id="year" name="year" class="form-control">
+				               </select>				               				               
+				               <input type="hidden" id="birthDate" name="birthDate"  placeholder="Birthdate"/>
+				               <span class="input-group-addon">
+				               <span class="glyphicon glyphicon-calendar"></span>
+				               </span>
+				            </div>		                
+		                </div>
+						<div class="form-group">
+							<label for="fichier"> Attach your photo </label>
+							<div class="file-upload">
+								<div class="file-select" id="file-select">
+									<div class="file-select-button" id="fileName">Upload a photo
+										File</div>
+									<div class="file-select-name" id="noFile">No file
+										chosen...</div>
+									<input type="file" name="fichier" id="file-to-upload">
+								</div>
+							</div>
+							<img src="" alt="Red dot" id="img" style="display: none" />
+							<input type="hidden" name="format" id="format" /> <input
+								type="hidden" name="photo" id="file" /> <input type="hidden"
+								name="tailleFichier" id="tailleFichier" />
+						</div>
+                </div>
+                <div class="col col-6">
+		                <div class="form-group">
+		                     <select class="form-control  form-control-lg" name="pays" id="pays">
+		                		<option value="-1">Choose your country</option>
+		                		<th:block th:each="p: ${pays}">
+		                		<option th:value="${p.nom}" th:text="${p.nom}"></option>
+		                		</th:block>
+		                		<input type="hidden" name="paysJSON" id="paysJSON" th:value="${paysJSON}" />
+		                	</select>
+		                </div>
+		                <div class="form-group">
+		                	<select class="form-control" name="ville" id="city">
+		                		<option value="-1">choose your city</option>
+		                	</select>
+		                </div>                
+		                <div class="form-group">
+		                    <input class="form-control form-control-lg" id="pass1" name="address" type="text" required="" placeholder="Address">
+		                </div>                
+                		 <div class="form-group">
+		                    <input class="form-control form-control-lg" type="phone" name="phone" placeholder="Your Phone number">
+		                </div>
+		                <div class="form-group">
+		                    <input class="form-control form-control-lg" type="email" name="email" required="" placeholder="E-mail" autocomplete="off">
+		                </div>
+		                <div class="form-group">
+		                    <input class="form-control form-control-lg" id="pass1" name="password" type="password" required="" placeholder="Password">
+		                </div>
+		                <div class="form-group">
+		                    <input class="form-control form-control-lg" required="" name="confirm_password" type="password" placeholder="Confirm">
+		                </div>                		
+                </div>
+            </div>
+                <div class="form-group">
+                    <label class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="terms-checked"><span class="custom-control-label">By creating an account, you agree the <a th:href="@{/terms_conditions}" style="text-decoration: underline; color:#0c2fee;">terms and conditions</a></span>
+                    </label>
+                </div>
+                <div class="form-group pt-2">
+                    <button class="btn btn-block btn-primary" id="submit" type="submit">Register My Account</button>
+                </div>
+
+
+            </div>
+            <div class="card-footer bg-white">
+                <p>Already member? <a th:href="@{/}" class="text-secondary">Login Here.</a></p>
+            </div>
+        </div>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+       <script  th:src="@{/assets/genius/js/compressor.js}"></script>
+    <script>
+    $(function () {
+
+        $("#form").on('submit', function(){
+        	let d=Date.parse($("#month").val()+"/"+$("#day").val()+"/"+$("#year").val());
+        	$("#birthDate").val(d);
+        	//alert("ok");
+        });
+    });
+    </script>
+  		<script>
+			$('#file-to-upload').bind('change', function() {
+				var filename = $("#file-to-upload").val();
+				if (/^\s*$/.test(filename)) {
+					$(".file-upload").removeClass('active');
+					$("#noFile").text("No file chosen...");
+				} else {
+					$(".file-upload").addClass('active');
+					$("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+				}
+				$(".file-upload").addClass('active');
+				$("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+			});
+
+		</script> 
+		<script>
+		(function () {
+		    let year_satart = 1940;
+		    let year_end = (new Date).getFullYear(); // current year
+		    let year_selected = 1992;
+		  
+		    let option = '';
+		    option = '<option>Year</option>'; // first option
+		  
+		    for (let i = year_satart; i <= year_end; i++) {
+		        let selected = (i === year_selected ? ' selected' : '');
+		        option += '<option value="' + i + '"' + selected + '>' + i + '</option>';
+		    }
+		  
+		    document.getElementById("year").innerHTML = option;
+		})();
+		(function () {
+		    let day_selected = (new Date).getDate(); // current day
+		    let option = '';
+		    option = '<option>Day</option>'; // first option
+		  
+		    for (let i = 1; i < 32; i++) {
+		        // value day number with 0. 01 02 03 04..
+		        let day = (i <= 9) ? '0' + i : i;
+		      
+		        // or value day number 1 2 3 4..
+		        // let day = i;
+		      
+		        let selected = (i === day_selected ? ' selected' : '');
+		        option += '<option value="' + day + '"' + selected + '>' + day + '</option>';
+		    }
+		    document.getElementById("day").innerHTML = option;
+		})();
+		(function () {
+		    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		    var month_selected = (new Date).getMonth(); // current month
+		    var option = '';
+		    option = '<option>Month</option>'; // first option
+
+		    for (let i = 0; i < months.length; i++) {
+		        let month_number = (i + 1);
+
+		        // value month number with 0. 01 02 03 04..
+		        let month = (month_number <= 9) ? '0' + month_number : month_number;
+		      
+		        // or value month number 1 2 3 4..
+		        // let month = month_number;
+		      
+		        // or value month names January February
+		        // let month = months[i];
+		      
+		        let selected = (i === month_selected ? ' selected' : '');
+		        option += '<option value="' + month + '"' + selected + '>' + months[i] + '</option>';
+		    }
+		    document.getElementById("month").innerHTML = option;
+		})();	
+		
+		/*Country format .... */
+		$(function(){
+			$("#submit").attr('disabled', !$("#terms-checked").prop("checked"));
+			$("#terms-checked").change(function() {
+				$("#submit").attr('disabled', !this.checked);
+			});			
+			$("#pays").on("change", function(){
+				$("#city").html("<option value='-1'>Choose your city</option>");
+				let pays=$(this).val();
+				let json=JSON.parse($("#paysJSON").val());
+				let current=json.filter(w=>w.nom==pays);
+				//alert(pays);
+				let villes=[];
+				if(current.length>0){
+					villes=current[0].cities;
+					//alert(JSON.stringify(villes));
+					
+					for(let i=0;i<villes.length;i++){
+						
+						$("#city").append("<option value=\""+villes[i].nom+"\">"+villes[i].nom+"</option>")
+					}
+					
+					
+				}
+			});
+		});
+
+		/**/
+		</script>		  
+</body>
+
+ 
+</html>

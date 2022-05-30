@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template">
+<head>
+
+<title th:inline="text">Informations about your package
+	[[${categorie.categorie}]]</title>
+<style>
+</style>
+</head>
+<body>
+	<!-- ============================================================== -->
+	<!-- main wrapper -->
+	<!-- ============================================================== -->
+	<div class="dashboard-main-wrapper">
+		<!-- ============================================================== -->
+		<!-- wrapper  -->
+		<!-- ============================================================== -->
+		<div class="dashboard-wrapper">
+			<div class="dashboard-ecommerce">
+				<div class="container-fluid dashboard-content "
+					layout:fragment="content">
+					<th:block th:if="${code==1}">
+						<div class="alert alert-success">
+							<strong th:text=${message}></strong> .
+						</div>
+					</th:block>
+					<th:block th:if="${code==-1}">
+						<div class="alert alert-danger">
+							<strong th:text=${message}></strong> .
+						</div>
+					</th:block>
+					<!-- ============================================================== -->
+					<!-- pageheader  -->
+					<!-- ============================================================== -->
+					<div class="row">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="page-header">
+								<h2 class="pageheader-title">Articles has been added to
+									[[${categorie.categorie}]]</h2>
+							</div>
+						</div>
+					</div>
+
+					<!-- ============================================================== -->
+					<!-- end pageheader  -->
+					<!-- Buttons area  -->
+
+					<!--  end button area    -->
+					<!-- ============================================================== -->
+
+					<!-- ============================================================== -->
+
+					<!-- recent orders  -->
+					<!-- ============================================================== -->
+					<div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
+						<!-- ============================================================== -->
+						<!-- select options  -->
+						<!-- ============================================================== -->
+						<div class="card">
+							<div class="row">
+								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+									<div class="card-body border-top">
+										<h3></h3>
+										<!--                                              ------- Table articles strt here  -->
+										<div class="table-responsive">
+											<table class="table">
+												<tbody>
+													<tr>
+														<td>ID</td>
+													</tr>
+													<tr>
+														<td th:text="${categorie.id}"></td>
+													</tr>
+													<tr>
+														<td>Categorie</td>
+													</tr>
+													<tr>
+														<td th:text="${categorie.categorie}"></td>
+													</tr>
+													<tr>
+														<td>Price</td>
+													</tr>
+													<tr>
+														<td th:text="${categorie.prix}"></td>
+													</tr>
+													<tr>
+														<td>MAX DEVICES</td>
+													</tr>
+													<tr>
+														<td th:text="${categorie.totalMAC}"></td>
+													</tr>
+													<tr>
+														<td>Expiration period</td>
+													</tr>
+													<tr>
+														<td th:text="${categorie.periode}"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="table-responsive">
+											<table class="table">
+												<thead class="bg-light">
+													<tr class="border-0">
+														<th class="border-0">Image</th>
+														<th class="border-0">Product title</th>
+														<th class="border-0">Description</th>
+														<th class="border-0">edited At</th>
+													</tr>
+												</thead>
+												<tbody>
+													<th:block th:each="as: ${assignations}">
+														<tr>
+															<td><label class="custom-control custom-checkbox">
+																	<input type="checkbox" checked=""
+																	class="custom-control-input check"> <input
+																	type="hidden" class="idArticle"
+																	th:value="${as.article.id}" /> <span
+																	class="custom-control-label"></span>
+															</label></td>
+															<td>
+																<div class="m-r-10">
+																	<img
+																		th:src="@{/video/{typeMedia}/{id}/{thumbnail}(typeMedia=${as.article.typeMedia}, id=${as.article.id}, thumbnail=${as.article.thumbnail})}"
+																		alt="user" class="rounded" width="100" />
+																</div>
+															</td>
+															<td th:text="${as.article.title}"></td>
+															<td th:text="${as.article.content}"></td>
+															<td th:text="${as.article.editeLe}"></td>
+														</tr>
+													</th:block>
+												</tbody>
+											</table>
+										</div>
+
+										<!--                                         ------------------ End here -------------------------------- -->
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ============================================================== -->
+				<!-- end recent orders  -->
+
+
+				<!-- ============================================================== -->
+			</div>
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- end wrapper  -->
+	<!-- ============================================================== -->
+
+	<th:block layout:fragment="script">
+
+		<script>
+
+
+
+		</script>
+
+	</th:block>
+</body>
+
+</html>

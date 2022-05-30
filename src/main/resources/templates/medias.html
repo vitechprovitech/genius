@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorator="template">
+<head>
+<th:block layout:fragment="style">
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.1.1/css/dataTables.dateTime.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" type="text/css" />
+</th:block>
+
+
+    <title>Contents managment</title>
+</head>
+<body>
+    <!-- ============================================================== -->
+    <!-- main wrapper -->
+    <!-- ============================================================== -->
+    <div class="dashboard-main-wrapper">
+        <!-- ============================================================== -->
+        <!-- wrapper  -->
+        <!-- ============================================================== -->
+        <div class="dashboard-wrapper">
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content "  layout:fragment="content">
+                    <!-- ============================================================== -->
+                    <!-- pageheader  -->
+                    <!-- ============================================================== -->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">Contents monitoring </h2>
+                                <p class="pageheader-text">Tracking activities on contents</p>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a th:href="@{/}" class="breadcrumb-link">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">List of contents</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- end pageheader  -->
+                    <!-- ============================================================== -->
+                    <div class="row">
+                            <!-- ============================================================== -->
+                      
+                            <!-- ============================================================== -->
+
+                                          <!-- recent orders  -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+	                        	<div class="card" style="padding:10px">
+									<a class="btn btn-danger btn-rounded"  data-mdb-ripple-color="dark" style="background-color: #ee55a2; width:30%" th:href="@{/newUploadView}" role="button">
+									<i class="fa fa-plus"></i>
+									  Add new upload
+									</a>                         	
+	                        	</div>                            
+                                                            
+                                <div class="card" style="padding:12px">                                
+                                    <h5 class="card-header">List of contents</h5>
+                                    <div class="card-body p-0" >
+                                        <div class="table-responsive" style="padding:10px">
+								        <table border="0" cellspacing="5" cellpadding="5">
+								            <tbody><tr>
+								                    <td>Minimum date:</td>
+								                    <td><input type="text" id="min" name="min"></td>
+								                </tr>
+								                <tr>
+								                    <td>Maximum date:</td>
+								                    <td><input type="text" id="max" name="max"></td>
+								                </tr>
+								            </tbody></table>                                        
+        <table id="example" class="display nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Images</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Viewed at</th>
+                    <th>viewed by</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="a: ${actions}">
+                    <td th:text="${a.id}"></td>
+                    <td>
+                        <div class="m-r-10">
+                     
+                           <img th:src="@{/video/{typeMedia}/{id}/{thumbnail}(typeMedia=${a.article.article.typeMedia}, id=${a.article.article.id}, thumbnail=${a.article.article.thumbnail})}" alt="user" class="rounded" width="45">                
+						</div>
+                    </td>
+                    <td th:text="${a.article.article.title}"></td>
+                    <td th:text="${a.article.article.typeMedia}"></td>
+                    <td th:inline="text">
+									[[${#dates.format(a.article.article.editeLe,
+										'yyyy/MM/dd hh:mm:ss')}]]                   
+                    </td>
+                    <td th:text="${a.user.name}">$320,800</td>
+                </tr>
+
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>Images</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Viewed at</th>
+                    <th>viewed by</th>
+                </tr>
+            </tfoot>
+        </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- end recent orders  -->
+
+    
+                            <!-- ============================================================== -->
+                        </div>                    
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+
+            <!-- ============================================================== -->
+            <!-- end footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- end wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <th:block layout:fragment="script">
+         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <script src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js"></script>
+        <script>
+
+            var minDate, maxDate;
+
+// Custom filtering function which will search data in column four between two values
+            $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var min = minDate.val();
+                        var max = maxDate.val();
+                        var date = new Date(data[4]);
+
+                        if (
+                                (min === null && max === null) ||
+                                (min === null && date <= max) ||
+                                (min <= date && max === null) ||
+                                (min <= date && date <= max)
+                                ) {
+                            return true;
+                        }
+                        return false;
+                    }
+            );
+
+            $(document).ready(function () {
+                // Create date inputs
+                minDate = new DateTime($('#min'), {
+                    format: 'MMMM Do YYYY'
+                });
+                maxDate = new DateTime($('#max'), {
+                    format: 'MMMM Do YYYY'
+                });
+
+                // DataTables initialisation
+                var table = $('#example').DataTable();
+
+                // Refilter the table
+                $('#min, #max').on('change', function () {
+                    table.draw();
+                });
+            });
+        </script>    
+ 	</th:block>
+</body>
+ 
+</html>

@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template">
+<head>
+
+<title>New upload</title>
+<style>
+.file-upload {
+	display: block;
+	text-align: center;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+}
+
+.file-upload .file-select {
+	display: block;
+	border: 2px solid #dce4ec;
+	color: #34495e;
+	cursor: pointer;
+	height: 40px;
+	line-height: 40px;
+	text-align: left;
+	background: #FFFFFF;
+	overflow: hidden;
+	position: relative;
+}
+
+.file-upload .file-select .file-select-button {
+	background: #dce4ec;
+	padding: 0 10px;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+}
+
+.file-upload .file-select .file-select-name {
+	line-height: 40px;
+	display: inline-block;
+	padding: 0 10px;
+}
+
+.file-upload .file-select:hover {
+	border-color: #34495e;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload .file-select:hover .file-select-button {
+	background: #34495e;
+	color: #FFFFFF;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload.active .file-select {
+	border-color: #3fa46a;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload.active .file-select .file-select-button {
+	background: #3fa46a;
+	color: #FFFFFF;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload .file-select input[type=file] {
+	z-index: 100;
+	cursor: pointer;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	filter: alpha(opacity = 0);
+}
+
+.file-upload .file-select.file-select-disabled {
+	opacity: 0.65;
+}
+
+.file-upload .file-select.file-select-disabled:hover {
+	cursor: default;
+	display: block;
+	border: 2px solid #dce4ec;
+	color: #34495e;
+	cursor: pointer;
+	height: 40px;
+	line-height: 40px;
+	margin-top: 5px;
+	text-align: left;
+	background: #FFFFFF;
+	overflow: hidden;
+	position: relative;
+}
+
+.file-upload .file-select.file-select-disabled:hover .file-select-button
+	{
+	background: #dce4ec;
+	color: #666666;
+	padding: 0 10px;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+}
+
+.file-upload .file-select.file-select-disabled:hover .file-select-name {
+	line-height: 40px;
+	display: inline-block;
+	padding: 0 10px;
+}
+
+/*   -----------------------------------------------  thumbnail upload style*/
+#video-demo-container {
+	width: 400px;
+	margin: 40px auto;
+}
+
+#main-video {
+	display: none;
+	max-width: 400px;
+}
+
+#thumbnail-container {
+	display: none;
+}
+
+#get-thumbnail {
+	display: none;
+}
+
+#video-canvas {
+	display: none;
+}
+
+#upload-button {
+	width: 150px;
+	display: block;
+	margin: 20px auto;
+}
+
+/*end thumnails                        */
+</style>
+</head>
+<body>
+	<!-- ============================================================== -->
+	<!-- main wrapper -->
+	<!-- ============================================================== -->
+	<div class="dashboard-main-wrapper">
+		<!-- ============================================================== -->
+		<!-- wrapper  -->
+		<!-- ============================================================== -->
+		<div class="dashboard-wrapper">
+			<div class="dashboard-ecommerce">
+				<div class="container-fluid dashboard-content "
+					layout:fragment="content">
+					<!-- ============================================================== -->
+					<!-- pageheader  -->
+					<!-- ============================================================== -->
+					<div class="row">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="page-header">
+								<h2 class="pageheader-title">New upload</h2>
+								<p class="pageheader-text">List of uploads</p>
+								<div class="page-breadcrumb">
+									<nav aria-label="breadcrumb">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item"><a th:href="@{/}"
+												class="breadcrumb-link">Home</a></li>
+											<li class="breadcrumb-item" aria-current="page"><a
+												th:href="@{/categories}" class="breadcrumb-link">Contents
+													management</a></li>
+											<li class="breadcrumb-item active" aria-current="page">New
+												upload</li>
+										</ol>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- ============================================================== -->
+					<!-- end pageheader  -->
+					<!-- Buttons area  -->
+
+					<!--  end button area    -->
+					<!-- ============================================================== -->
+
+					<!-- ============================================================== -->
+
+					<!-- recent orders  -->
+					<!-- ============================================================== -->
+					<div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
+
+						<!-- ============================================================== -->
+						<!-- select options  -->
+						<!-- ============================================================== -->
+						<div class="card">
+							<div class="row">
+							<div class="table-responsive" style="padding:30px">
+								<table class="table table-striped" >
+									<tr>
+										<td>ID</td>
+										<td th:text="${assignation.article.id}"></td>
+									</tr>
+									<tr>
+										<td>TYPE</td>
+										<td th:text="${assignation.article.typeMedia}"></td>
+									</tr>									
+									<tr>
+										<td>Category</td>
+										<td th:text="${assignation.categorie.categorie}"></td>
+									</tr>									
+									<tr>
+										<td>Title</td>
+										<td th:text="${assignation.article.title}"></td>
+									</tr>
+									<tr>
+										<td>Content</td>
+										<td th:text="${assignation.article.content}"></td>
+									</tr>
+									<tr>
+										<td>State</td>
+										<td>
+											<th:block th:switch="${assignation.article.state}">
+												<th:block th:case=0>
+														<strong style="color: #ffbb00;">WAITING
+															... </strong>
+												
+												</th:block>
+												<th:block th:case=1>
+														State : <strong style="color: #08aa5c;">PUBLISHED
+														</strong>
+												</th:block>
+												<th:block th:case=-4>
+													<div th:inline="text">
+														State : <strong style="color: #ff0460;">REJECTED
+														</strong>
+													</div>
+												</th:block>
+											</th:block>									
+										</td>
+									</tr>
+									<th:block th:if="${assignation.article.state==1}">
+										<tr>
+											<td>Published at</td>
+											<td th:text="${#dates.format(assignation.article.valideLe, 'dd-MM-yyyy hh:mm:ss')}"></td>
+										</tr>									
+										<tr>
+											<td>Price</td>
+											<td th:text="${assignation.article.prix}"></td>
+										</tr>
+										<tr>
+											<td>Max devices</td>
+											<td th:text="${assignation.article.totalMAC}"></td>
+										</tr>
+										<tr>
+											<td>Period</td>
+											<td th:text="${assignation.article.periode}"></td>
+										</tr>																				
+									</th:block>										
+									<tr>
+										<td colspan="2">
+										<center>
+										<!-- Button trigger modal -->
+						                                                <a href="#" class="btn btn-primary rounded show" data-toggle="modal" data-target="#exampleModal">
+						                                                           <i class="fa fa-eye"></i> Show
+						                                                        </a>	<a th:href="@{/video/{typeMedia}/{id}/{thumbnail}(typeMedia=${assignation.article.typeMedia}, id=${assignation.article.id}, thumbnail=${assignation.article.fichier})}" style="display:none" th:class="lien" ></a>
+						                                                <!-- Modal -->
+						                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						                                                    <div class="modal-dialog" role="document">
+						                                                        <div class="modal-content">
+						                                                            <div class="modal-header">
+						                                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+						                                                                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+						                                                                            <span aria-hidden="true">&times;</span>
+						                                                                        </a>
+						                                                            </div>
+						                                                            <div class="modal-body">
+																						<video autoplay id="main-video" style="display:none; max-width:400px" controls>
+																							<source type="video/mp4" >
+																							
+																						</video>
+																						<canvas id="video-canvas" style="display:none"></canvas>
+						                                                            </div>
+						                                                            <div class="modal-footer">
+						                                                                <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+						                                                            </div>
+						                                                        </div>
+						                                                    </div>
+						                                                </div>	
+										 </center>
+										</td>
+									</tr>
+								</table>
+							</div>
+	
+								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+									<div class="card-body border-top">
+										<h3></h3>
+										<form th:action="@{/validateArticle}" method="post" enctype="multipart/form-data" id="form">
+											<input type="hidden" th:value="${assignation.article.id}" name="id" />
+											<input type="hidden" th:value="${assignation.categorie.id}" name="idCategorie" />
+											<div class="form-group">
+												<label for=typeMedia> Choose a decision</label> 
+												<select
+													class="form-control" id="typeMedia" name="state">
+													<option value="-4">REJECT</option>
+													<option value="1">VALIDATE</option>
+													<option value="-1">BLOCK</option>
+													
+												</select>
+											</div>
+											<div class="form-group">
+											<label for=totalMAC> Max devices</label> 
+												<div class='input-group'>
+													<input class="form-control form-control-lg" type="text"
+														id="totalMAC" name="totalMAC" required=""
+														placeholder="Max devices" />
+												</div>
+											</div>
+											<div class="form-group">
+											<label for=periode> Expiration period</label> 
+												<div class='input-group'>
+													<input class="form-control form-control-lg" type="text"
+														id="periode" name="periode" required=""
+														placeholder="Expiration period" />
+												</div>
+											</div>
+											<div class="form-group">
+											<label for=periode> Price </label> 
+												<div class='input-group'>
+													<input class="form-control form-control-lg" type="text"
+														id="periode" name="prix" required=""
+														placeholder="Price " />
+												</div>
+											</div>											
+											<div class="form-group pt-2">
+												<button class="btn btn-block btn-primary" id="submit"
+													style="width: 30%" type="submit">
+													<i class="fa fa-save"></i> Submit </a>
+												</button>
+											</div>											
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ============================================================== -->
+				<!-- end recent orders  -->
+
+
+				<!-- ============================================================== -->
+			</div>
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- end wrapper  -->
+	<!-- ============================================================== -->
+
+		<th:block layout:fragment="script">
+			<script th:src="@{assets/vendor/context-menu/js/demo2.js}"></script>
+
+			<script>
+				var lien="";
+				$('.show').on('click', function (e) {
+					lien=$(this).next(".lien").attr("href");
+				});
+				var _CANVAS = document.querySelector("#video-canvas"),
+				_CTX = _CANVAS.getContext("2d"),
+				_VIDEO = document.querySelector("#main-video");	
+				
+				$('#exampleModal').on('show.bs.modal', function (e) {
+
+					// Object Url as the video source
+					document.querySelector("#main-video source").setAttribute('src', lien);
+					// Load the video and show it
+					_VIDEO.load();
+					_VIDEO.style.display = 'inline';
+					
+					// Load metadata of the video to get video duration and dimensions
+					_VIDEO.addEventListener('loadedmetadata', function() { console.log(_VIDEO.duration);
+					    var video_duration = _VIDEO.duration,
+					    	duration_options_html = '';
+					    // Set canvas dimensions same as video dimensions
+					    _CANVAS.width = _VIDEO.videoWidth;
+						_CANVAS.height = _VIDEO.videoHeight;
+					});
+		    
+				});
+				$(document).on('hide.bs.modal', "#exampleModal", function(e) {
+					
+					$(_VIDEO).get(0).pause();
+				});
+			</script>
+			
+		</th:block>
+</body>
+
+</html>

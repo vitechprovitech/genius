@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Validation code</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}" />
+    <link th:href="@{assets/vendor/fonts/circular-std/style.css}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{assets/libs/css/style.css}" />
+    <link rel="stylesheet" th:href="@{assets/vendor/fonts/fontawesome/css/fontawesome-all.css}" />
+    <style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    .logo-img{
+    	width:30%
+    }
+    </style>
+</head>
+
+<body style="background: #16214d">
+    <!-- ============================================================== -->
+    <!-- login page  -->
+    <!-- ============================================================== -->
+    <div class="splash-container">
+
+        <div class="card ">
+			<th:block th:if="${code==1}">
+					<div class="alert alert-success" >
+					  <strong th:text=${message}></strong> .
+					</div>  
+			</th:block>
+			<th:block th:if="${code==-1}">
+						<div class="alert alert-danger">
+						  <strong th:text=${message}></strong> .
+						</div>
+			</th:block>          
+            <div class="card-header text-center"><a th:href="@{index.html}"><img class="logo-img" th:src="@{assets/images/logo.png}" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
+            <div class="card-body">
+            
+                <form th:action="${type!='password'} ? @{/validationCodeWeb} : @{/checkTokenWeb}" method="post">
+                <input type="hidden" name="email" th:value="${email}" />
+                <input type="hidden" name="type" th:value="${type}" />
+                    <div class="form-group">
+                        <input class="form-control form-control-lg" id="code" name="code" type="text" placeholder="Enter your code, you get by mail" autocomplete="off" />
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Validate</button>
+                </form>
+            </div>
+            <div class="card-footer bg-white p-0  ">
+                <div class="card-footer-item card-footer-item-bordered">
+                    <a th:href="@{/signUpView}" class="footer-link">Create An Account</a></div>
+                <div class="card-footer-item card-footer-item-bordered">
+                    <a href="#" class="footer-link">Forgot Password</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <!-- ============================================================== -->
+    <!-- end login page  -->
+    <!-- ============================================================== -->
+    <!-- Optional JavaScript -->
+    <script th:src="@{assets/vendor/jquery/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{assets/vendor/bootstrap/js/bootstrap.bundle.js}"></script>
+    <script>
+    	showMacAddress();
+    function showMacAddress(){
+     
+    	var obj = new ActiveXObject("WbemScripting.SWbemLocator");
+    	var s = obj.ConnectServer(".");
+    	var properties = s.ExecQuery("SELECT * FROM Win32_NetworkAdapterConfiguration");
+    	var e = new Enumerator (properties);
+
+     
+    	var output;
+    	output='<table border="0" cellPadding="5px" cellSpacing="1px" bgColor="#CCCCCC">';
+    	output=output + '<tr bgColor="#EAEAEA"><td>Caption</td><td>MACAddress</td></tr>';
+    	while(!e.atEnd())
+
+    	{
+    		e.moveNext();
+    		var p = e.item ();
+    		if(!p) continue;
+    		output=output + '<tr bgColor="#FFFFFF">';
+    		output=output + '<td>' + p.Caption; + '</td>';
+    		output=output + '<td>' + p.MACAddress + '</td>';
+    		output=output + '</tr>';
+    	}
+
+    	output=output + '</table>';
+    	document.getElementById("box").innerHTML=output;
+    }
+
+    </script>
+</body>
+ 
+</html>

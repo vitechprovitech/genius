@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div class="row" th:fragment="contents(articles)">
+		<div class="col-lg-4 col-xl-3" th:each="a: ${articles}">
+		
+
+
+			<input type="hidden" th:value="${a.article.id}">
+			<div class="file-man-box">
+			<th:block th:if="${a.categorie.parent!=null}">
+				<div
+					style=" position: absolute;box-shadow: 2px 2px 2px #b3b3bc; left:0; padding:4px 6px;color: #dffeff; background: #1a1717b3; width: 100%; z-index: 100; top: 0px; ">
+					<span style="color: #ffffff; font-size: 20px; font-weight: 900;"><center th:inline="text">bundle: [[${a.categorie.categorie}]]</center><hr style="    border: 1px solid white;  margin: 5px;"/></span>
+				<div th:inline="text">
+					Price : <strong style="color: #08aa5c;">[[${a.prix}]]
+					</strong>
+				</div>
+				<div th:inline="text">
+					Period : <strong style="color: #08aa5c;">[[${a.periode}]]
+					</strong>
+				</div>
+				<div th:inline="text">
+					State : <strong style="color: #08aa5c;">PUBLISHED </strong>
+				</div>
+				<div th:inline="text">
+					MAX DEVICES : <strong style="color: #08aa5c;">[[${a.totalMac}]]
+					</strong>
+				</div>
+				<div th:inline="text">
+					published at : <strong>[[${#dates.format(a.article.editeLe,
+						'dd-MM-yyyy hh:mm:ss')}]]</strong>
+				</div>
+				</div>			
+			</th:block>			
+				<a href="" class="file-close"><i class="fa fa-times-circle"></i></a>
+				<div class="file-img-box">
+					<a href=""> <th:block th:switch="${a.article.typeMedia}">
+							<th:block th:case='VIDEO'>
+								<img
+									th:src="@{/video/{typeMedia}/{id}/{thumbnail}(typeMedia=${a.article.typeMedia}, id=${a.article.id}, thumbnail=${a.article.thumbnail})}"
+									alt="icon" />
+							</th:block>
+							<th:block th:case='AUDIO'>
+								<img class="thumb media-object"
+									th:src="@{/assets/images/audio.svg}" alt="" />
+							</th:block>
+							<th:block th:case='BOOK'>
+								<img class="thumb media-object book"
+									th:src="@{/assets/images/pdf.svg}" alt="" />
+							</th:block>
+						</th:block>
+					</a>
+				</div>
+				<a href="#" class="file-download"></a>
+				<div class="file-man-title" style="margin: 15px 0px;">
+					<h5 class="mb-0 " th:text="${a.article.title}"></h5>
+					<p class="mb-0">
+						<small th:inline="text">Author :
+							[[${a.article.editedBy.name}]]</small>
+					</p>
+				</div>
+				<div th:inline="text">
+					Price : <strong style="color: #08aa5c;">[[${a.article.prix}]]
+					</strong>
+				</div>
+				<div th:inline="text">
+					Period : <strong style="color: #08aa5c;">[[${a.article.periode}]]
+					</strong>
+				</div>
+				<div th:inline="text">
+					State : <strong style="color: #08aa5c;">PUBLISHED </strong>
+				</div>
+				<div th:inline="text">
+					MAX DEVICES : <strong style="color: #08aa5c;">[[${a.article.totalMAC}]]
+					</strong>
+				</div> 
+				<div th:inline="text">
+					published at : <strong>[[${#dates.format(a.article.editeLe,
+						'dd-MM-yyyy hh:mm:ss')}]]</strong>
+				</div>
+				<div>
+					<center>
+						<a th:href="@{/showValidationMediaWeb(id=${a.id})}"
+							class="btn btn-primary rounded" type="button"><i
+							class="fa fa-check"></i> Subscribe</a>
+					</center>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

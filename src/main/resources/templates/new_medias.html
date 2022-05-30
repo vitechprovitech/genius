@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template">
+<head>
+
+<title>New upload</title>
+<style>
+.file-upload {
+	display: block;
+	text-align: center;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+}
+
+.file-upload .file-select {
+	display: block;
+	border: 2px solid #dce4ec;
+	color: #34495e;
+	cursor: pointer;
+	height: 40px;
+	line-height: 40px;
+	text-align: left;
+	background: #FFFFFF;
+	overflow: hidden;
+	position: relative;
+}
+
+.file-upload .file-select .file-select-button {
+	background: #dce4ec;
+	padding: 0 10px;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+}
+
+.file-upload .file-select .file-select-name {
+	line-height: 40px;
+	display: inline-block;
+	padding: 0 10px;
+}
+
+.file-upload .file-select:hover {
+	border-color: #34495e;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload .file-select:hover .file-select-button {
+	background: #34495e;
+	color: #FFFFFF;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload.active .file-select {
+	border-color: #3fa46a;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload.active .file-select .file-select-button {
+	background: #3fa46a;
+	color: #FFFFFF;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+}
+
+.file-upload .file-select input[type=file] {
+	z-index: 100;
+	cursor: pointer;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	filter: alpha(opacity = 0);
+}
+
+.file-upload .file-select.file-select-disabled {
+	opacity: 0.65;
+}
+
+.file-upload .file-select.file-select-disabled:hover {
+	cursor: default;
+	display: block;
+	border: 2px solid #dce4ec;
+	color: #34495e;
+	cursor: pointer;
+	height: 40px;
+	line-height: 40px;
+	margin-top: 5px;
+	text-align: left;
+	background: #FFFFFF;
+	overflow: hidden;
+	position: relative;
+}
+
+.file-upload .file-select.file-select-disabled:hover .file-select-button
+	{
+	background: #dce4ec;
+	color: #666666;
+	padding: 0 10px;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+}
+
+.file-upload .file-select.file-select-disabled:hover .file-select-name {
+	line-height: 40px;
+	display: inline-block;
+	padding: 0 10px;
+}
+
+/*   -----------------------------------------------  thumbnail upload style*/
+#video-demo-container {
+	width: 400px;
+	margin: 40px auto;
+}
+
+#main-video {
+	display: none;
+	max-width: 400px;
+}
+
+#thumbnail-container {
+	display: none;
+}
+
+#get-thumbnail {
+	display: none;
+}
+
+#video-canvas {
+	display: none;
+}
+
+#upload-button {
+	width: 150px;
+	display: block;
+	margin: 20px auto;
+}
+
+/*end thumnails                        */
+</style>
+</head>
+<body>
+	<!-- ============================================================== -->
+	<!-- main wrapper -->
+	<!-- ============================================================== -->
+	<div class="dashboard-main-wrapper">
+		<!-- ============================================================== -->
+		<!-- wrapper  -->
+		<!-- ============================================================== -->
+		<div class="dashboard-wrapper">
+			<div class="dashboard-ecommerce">
+				<div class="container-fluid dashboard-content "
+					layout:fragment="content">
+					<!-- ============================================================== -->
+					<!-- pageheader  -->
+					<!-- ============================================================== -->
+					<div class="row">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="page-header">
+								<h2 class="pageheader-title">New upload</h2>
+								<p class="pageheader-text">List of uploads</p>
+								<div class="page-breadcrumb">
+									<nav aria-label="breadcrumb">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item"><a th:href="@{/}"
+												class="breadcrumb-link">Home</a></li>
+											<li class="breadcrumb-item" aria-current="page"><a
+												th:href="@{/categories}" class="breadcrumb-link">Contents
+													management</a></li>
+											<li class="breadcrumb-item active" aria-current="page">New
+												upload</li>
+										</ol>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- ============================================================== -->
+					<!-- end pageheader  -->
+					<!-- Buttons area  -->
+
+					<!--  end button area    -->
+					<!-- ============================================================== -->
+
+					<!-- ============================================================== -->
+
+					<!-- recent orders  -->
+					<!-- ============================================================== -->
+					<div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
+
+						<!-- ============================================================== -->
+						<!-- select options  -->
+						<!-- ============================================================== -->
+						<div class="card">
+							<div class="row">
+								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+									<div class="card-body border-top">
+										<h3>Upload a product</h3>
+										<form th:action="@{/uploadMediasWeb}" method="post"
+											enctype="multipart/form-data" id="form">
+											<div class="form-group">
+												<label for=typeMedia> Type of product</label> <select
+													class="form-control" id="typeMedia" name="typeMedia">
+													<option value="-1">Choose a type</option>
+													<option value="AUDIO">AUDIO</option>
+													<option value="VIDEO">VIDEO</option>
+													<option value="BOOK">BOOK</option>
+												</select>
+											</div>
+											<div class="form-group">
+											<th:block th:if="${categorie!=null }">
+											<input type="hidden" th:value="${categorie.id}"> 
+											</th:block>
+												<label
+													for="categorie">Category</label> <select
+													class="form-control" id="categorie" name="categorie">
+													<th:block th:if="${categorie!=null}">
+														<option th:value="${categorie.id}"
+															th:text="${categorie.categorie}" selected></option>
+													</th:block>
+													<th:block th:unless="${categorie!=null}">
+														<option value="-1">Choose a category</option>
+														<th:block th:each="ca : ${categories}">
+															<option th:value="${ca.id}" th:text="${ca.categorie}"></option>
+
+
+														</th:block>
+													</th:block>
+
+												</select>
+											</div>
+											<div class="form-group">
+												<div class='input-group'>
+													<input class="form-control form-control-lg" type="text"
+														id="titre" name="titre" required=""
+														placeholder="Product title" />
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="contenu"> Description (optional)</label>
+												<div class='input-group'>
+
+													<textarea class="form-control" id="contenu" name="contenu"
+														rows="3"></textarea>
+												</div>
+											</div>
+
+
+
+											<div class="form-group">
+												<label for="fichier"> Product file </label>
+												<div class="file-upload">
+													<div class="file-select">
+														<div class="file-select-button" id="fileName">Choose
+															File</div>
+														<div class="file-select-name" id="noFile">No file
+															chosen...</div>
+														<input type="file" name="fichier" id="file-to-upload">
+													</div>
+												</div>
+
+												<video id="main-video" controls>
+													<source type="video/mp4">
+												</video>
+												<canvas id="video-canvas"></canvas>
+												<div id="thumbnail-container">
+													Seek to <select id="set-video-seconds"></select> seconds <a
+														id="get-thumbnail" href="#">Download Thumbnail</a>
+												</div>
+												<img src="" alt="Red dot" id="img" style="display: none" />
+												<input type="hidden" name="format" id="format" /> <input
+													type="hidden" name="f" id="file" /> <input type="hidden"
+													name="tailleFichier" id="tailleFichier" />
+
+
+											</div>
+											<div class="form-group pt-2">
+												<button type="submit" class="btn btn-block btn-primary" id="submit"
+													style="width: 30%">
+													<i class="fa fa-save"></i> Submit </a>
+												</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ============================================================== -->
+				<!-- end recent orders  -->
+
+
+				<!-- ============================================================== -->
+			</div>
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- end wrapper  -->
+	<!-- ============================================================== -->
+
+	<th:block layout:fragment="script">
+		<script>
+			$('#file-to-upload').bind('change', function() {
+				var filename = $("#file-to-upload").val();
+				if (/^\s*$/.test(filename)) {
+					$(".file-upload").removeClass('active');
+					$("#noFile").text("No file chosen...");
+				} else {
+					$(".file-upload").addClass('active');
+					$("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+				}
+				$(".file-upload").addClass('active');
+				$("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+			});
+
+		</script>
+		<script>
+
+				var _CANVAS = document.querySelector("#video-canvas"),
+					_CTX = _CANVAS.getContext("2d"),
+					_VIDEO = document.querySelector("#main-video");
+				
+				// Upon click this should should trigger click on the #file-to-upload file input element
+				// This is better than showing the not-good-looking file input element
+
+				
+				// When user chooses a MP4 file
+				document.querySelector("#file-to-upload").addEventListener('change', function() {
+					// Validate whether MP4
+				    if(['video/mp4'].indexOf(document.querySelector("#file-to-upload").files[0].type) == -1) {
+				    	if(['video/3gpp'].indexOf(document.querySelector("#file-to-upload").files[0].type) == -1) {
+				    		alert('Error : Only MP4 and 3gp formats allowed');
+				    	}
+				    	
+				        
+				        return;
+				    }
+				
+				    // Hide upload button
+					// Object Url as the video source
+					document.querySelector("#main-video source").setAttribute('src', URL.createObjectURL(document.querySelector("#file-to-upload").files[0]));
+					
+					// Load the video and show it
+					_VIDEO.load();
+					//_VIDEO.style.display = 'inline';
+					
+					// Load metadata of the video to get video duration and dimensions
+					_VIDEO.addEventListener('loadedmetadata', function() { console.log(_VIDEO.duration);
+					    var video_duration = _VIDEO.duration,
+					    	duration_options_html = '';
+				
+					    // Set options in dropdown at 4 second interval
+					    for(var i=0; i<Math.floor(video_duration); i=i+4) {
+					    	duration_options_html += '<option value="' + i + '">' + i + '</option>';
+					    }
+					    document.querySelector("#set-video-seconds").innerHTML = duration_options_html;
+					    
+					    // Show the dropdown container
+					    document.querySelector("#thumbnail-container").style.display = 'block';
+				
+					    // Set canvas dimensions same as video dimensions
+					    _CANVAS.width = _VIDEO.videoWidth/2;
+						_CANVAS.height = _VIDEO.videoHeight/2;
+		
+					    
+					});
+				});
+				
+				// On changing the duration dropdown, seek the video to that duration
+				document.querySelector("#set-video-seconds").addEventListener('change', function() {
+				    _VIDEO.currentTime = document.querySelector("#set-video-seconds").value;
+				    
+				    // Seeking might take a few milliseconds, so disable the dropdown and hide download link 
+				    document.querySelector("#set-video-seconds").disabled = true;
+				    document.querySelector("#get-thumbnail").style.display = 'none';
+				});
+				
+				// Seeking video to the specified duration is complete 
+				document.querySelector("#main-video").addEventListener('timeupdate', function() {
+					// Re-enable the dropdown and show the Download link
+					document.querySelector("#set-video-seconds").disabled = false;
+				    document.querySelector("#get-thumbnail").style.display = 'inline';
+				    _VIDEO.currentTime = 1;
+				    _CTX.drawImage(_VIDEO, 0, 0, _CANVAS.width, _CANVAS.height);
+				    document.querySelector("#img").setAttribute('src', _CANVAS.toDataURL());
+				    document.querySelector("#img").style.display = 'inline';
+					let l=_CANVAS.toDataURL();
+					let tab=l.split(",");
+					let base64=tab[tab.length-1];
+					//alert(base64);
+					document.getElementById("file").value=base64.trim();
+					//document.getElementById("file").value=b64toBlob(base64.trim(),"image/jpeg", parseInt(_CANVAS.width*_CANVAS.height));
+	
+				});
+					
+				// On clicking the Download button set the video in the canvas and download the base-64 encoded image data
+				document.querySelector("#get-thumbnail").addEventListener('click', function() {
+				    _CTX.drawImage(_VIDEO, 0, 0, _VIDEO.videoWidth, _VIDEO.videoHeight);
+				
+					document.querySelector("#get-thumbnail").setAttribute('href', _CANVAS.toDataURL());
+					document.querySelector("#get-thumbnail").setAttribute('download', 'thumbnail.jpg');
+
+					
+				});
+				
+				
+				var form = document.getElementById("form");
+/***********                **********/
+
+		        $("#form").on("submit", function () {
+		        		//alert($("#file-to-upload").val());
+		        		var fd=$('#form');
+		        		var x = document.createElement("INPUT");
+		        		x.setAttribute("type", "file");
+		        		x.setAttribute("name", "thumbnail");
+		        		x.setAttribute("value",  window.URL.createObjectURL(b64toBlob(document.getElementById("file").value)));
+		        		//alert($(x).val());
+		        		let file = new File([b64toBlob(document.getElementById("file").value)], "img.jpg",{type:"image/*", lastModified:new Date().getTime()});
+		        		let container = new DataTransfer();
+		        		container.items.add(file);
+		        		x.files = container.files;
+		        		$('#form').append(x);
+		        		
+		               // fd.append("thumbnail", b64toBlob(document.getElementById("file").value));
+		        });
+
+
+
+/**************************/
+				/*$("#submit").on("click", function(){
+					let url="";
+					let typeMedia=$("#typeMedia").val();
+					let fd = new FormData(form);
+					switch(typeMedia){
+						case "VIDEO":
+							url="/uploadMediasWeb";
+							fd.append("thumbnail", b64toBlob(document.getElementById("file").value));
+							break;
+						case "AUDIO":
+							url="/uploadPdfAudioWeb";
+							break
+						case "BOOK":
+							url="/uploadPdfAudioWeb";
+							break;
+					}
+						$.ajax({
+						    url: url,
+						    data: fd,
+						    cache: false,
+						    contentType: false,
+						    processData: false,
+						    method: 'POST',
+						    success: function(data){
+						    	alert("Reponse : "+JSON.stringify());
+						      console.log('success');
+						    }
+						});	
+				});*/
+
+				  function base64toBlob(base64Data, contentType) {
+					    contentType = contentType || '';
+					    var sliceSize = 1024;
+					    var byteCharacters = atob(base64Data);
+					    var bytesLength = byteCharacters.length;
+					    var slicesCount = Math.ceil(bytesLength / sliceSize);
+					    var byteArrays = new Array(slicesCount);
+
+					    for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+					        var begin = sliceIndex * sliceSize;
+					        var end = Math.min(begin + sliceSize, bytesLength);
+
+					        var bytes = new Array(end - begin);
+					        for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
+					            bytes[i] = byteCharacters[offset].charCodeAt(0);
+					        }
+					        byteArrays[sliceIndex] = new Uint8Array(bytes);
+					    }
+					    return new Blob(byteArrays, { type: contentType });
+					}
+				function b64toBlob(b64Data, contentType, sliceSize) {
+		            contentType = contentType || '';
+		            sliceSize = sliceSize || 512;
+
+		            var byteCharacters = atob(b64Data);
+		            var byteArrays = [];
+
+		            for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+		                var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+		                var byteNumbers = new Array(slice.length);
+		                for (var i = 0; i < slice.length; i++) {
+		                    byteNumbers[i] = slice.charCodeAt(i);
+		                }
+
+		                var byteArray = new Uint8Array(byteNumbers);
+
+		                byteArrays.push(byteArray);
+		            }
+
+		          var blob = new Blob(byteArrays, {type: contentType});
+		          return blob;
+		}
+		</script>
+
+	</th:block>
+</body>
+
+</html>
